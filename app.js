@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+var bodyParser = require('body-parser')
 
 const moviesRouter = require('./routes/movies')
 
@@ -9,12 +10,13 @@ const app = express()
 
 // connect to mongodb
 var mongoDB =
-  'mongodb+srv://dimas:bonantagon@cluster0.ijepu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+  'mongodb+srv://dimas:bonantagon@cluster0.ijepu.mongodb.net/cineplex-clone?retryWrites=true&w=majority'
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
-// specify routes
+// handle routing
+app.use(bodyParser.json())
 app.use('/movies', moviesRouter)
 
 app.listen(PORT, () => {
