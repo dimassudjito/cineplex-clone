@@ -1,6 +1,8 @@
-const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+
+const User = require('../models/User')
+const auth = require('../services/auth')
 
 function generateToken(user) {
   // REFACTOR use deconstruction
@@ -17,8 +19,14 @@ function generateToken(user) {
 }
 
 module.exports = {
-  getAll: async (req, res) => {
-    res.send('test user route')
+  getProfile: async (req, res) => {
+    let user
+    try {
+      user = auth.verify(req)
+    } catch (err) {
+      return res.status(400).json({ message: err.toString() })
+    }
+    res.send(user)
   },
   register: async (req, res, next) => {
     // REFACTOR to use deconstruction
