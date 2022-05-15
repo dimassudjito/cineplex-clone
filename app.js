@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 var bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 
-const moviesRouter = require('./routes/movies')
+const moviesRoutes = require('./routes/movies')
 
 // general setup
 const PORT = 5000
@@ -20,7 +20,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
 // handle routing
 app.use(bodyParser.json())
-app.use('/movies', moviesRouter)
+app.use('/movies', moviesRoutes)
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`)
