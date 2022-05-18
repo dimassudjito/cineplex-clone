@@ -13,8 +13,8 @@ dotenv.config()
 
 // connect to mongodb
 mongoose.connect(process.env.MONGODB_ADDR, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
@@ -25,5 +25,5 @@ app.use('/movies', moviesRoutes)
 app.use('/users', usersRoutes)
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`)
+    console.log(`Example app listening on port ${PORT}`)
 })
